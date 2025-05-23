@@ -1,1 +1,72 @@
+import numpy as np
+import matplotlib.pyplot as plt
 
+# 항목별 만족도 데이터 (5점 스케일)
+data = np.array([
+    [4, 4, 4, 4, 4, 4, 4],
+    [4, 4, 4, 4, 4, 4, 4],
+    [4, 3, 4, 4, 4, 4, 3],
+    [5, 2, 4, 4, 4, 2, 2],
+    [4, 3, 2, 3, 4, 2, 1],
+    [5, 5, 4, 5, 5, 4, 5],
+    [5, 5, 5, 3, 5, 5, 5],
+    [4, 4, 3, 4, 4, 3, 4],
+    [3, 3, 2, 2, 4, 4, 3],
+    [5, 4, 4, 5, 5, 5, 5],
+    [4, 5, 4, 5, 5, 4, 4],
+    [5, 5, 4, 4, 5, 4, 5],
+    [5, 3, 4, 5, 5, 3, 2],
+    [5, 5, 5, 5, 5, 4, 4],
+    [5, 4, 5, 5, 5, 4, 5],
+    [4, 4, 3, 4, 5, 2, 4],
+    [4, 3, 2, 4, 4, 2, 3],
+    [2, 2, 2, 2, 3, 2, 2],
+    [5, 5, 4, 4, 5, 4, 5],
+    [5, 5, 5, 4, 5, 4, 4]
+])
+
+# 전체 만족도 데이터 (10점 스케일)
+overall_satisfaction = np.array([
+    7, 6, 7, 4, 7, 8, 10, 6, 6, 9, 10, 8, 8, 9, 9, 6, 7, 3, 8, 9
+])
+
+# 항목별 만족도 데이터를 10점 스케일로 변환
+data_10_scale = data * 2
+
+# 모든 데이터를 10점 스케일로 맞춤
+questions = ["Empathy and understanding", "Accuracy and useful info",
+             "Complexity of content", "Active listening and questions",
+             "Positivity and support", "Perception of professionalism", "Personalization"]
+all_data = np.hstack((overall_satisfaction[:, np.newaxis], data_10_scale))
+
+# 박스 플롯을 위한 데이터 준비
+data_to_plot = [overall_satisfaction] + [data_10_scale[:, i] for i in range(data_10_scale.shape[1])]
+
+# 박스 플롯 생성
+fig, ax = plt.subplots(figsize=(12, 8))
+box = ax.boxplot(data_to_plot, patch_artist=True, vert=False)
+
+# 박스 색상 설정
+colors = [(46/255, 187/255, 210/255)] * len(data_to_plot)
+for patch, color in zip(box['boxes'], colors):
+    patch.set_facecolor(color)
+
+# 각 항목의 평균 계산 및 표시
+means = [np.mean(overall_satisfaction)] + [np.mean(data_10_scale[:, i]) for i in range(data_10_scale.shape[1])]
+for i, mean in enumerate(means):
+    ax.plot(mean, i + 1, 'ko')  # 평균을 검은 점으로 표시
+
+# 축 및 라벨 설정
+ax.set_yticklabels(["Overall satisfaction"] + questions)
+ax.set_xlabel('Score (out of 10)')
+plt.title('Box plot of scores for Dr.CareSam usability questions')
+plt.grid(axis='x', linestyle='--', alpha=0.7)  # x축에 점선 그리드 추가하여 가독성 향상
+
+# 눈금 단위를 2로 설정 및 x축 범위를 0에서 10.5로 설정
+ax.xaxis.set_major_locator(plt.MultipleLocator(2))
+ax.set_xlim(0, 10.5)
+
+# y축을 역순으로 설정
+ax.invert_yaxis()
+
+plt.show() 
