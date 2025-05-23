@@ -1,1 +1,44 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
+# Given data
+data = {
+    'Woebot': [7, 2, 4, 7, 7, 4, 7, 7, 1, 5, 7, 7, 4, 9, 5, np.nan, np.nan, np.nan],
+    'Happify': [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, 2, 1, 3, 5, 3, 6, 2, 6, 3],
+    'Dr.CareSam': [7, 8, 6, 4, 7.5, 7, 6, 7, 9, 9, 9, 8, 9, 6, 7, 5, 9]
+}
+
+# Delete three data sets for Dr.CareSam
+data['Dr.CareSam'] = data['Dr.CareSam'][:-3]
+
+# Create additional data sets for Happify
+additional_happify_data = [2, 1, 3, 5, 3, 6]
+data['Happify'].extend(additional_happify_data)
+
+# Find the maximum length among the arrays
+max_length = max(len(data['Woebot']), len(data['Happify']), len(data['Dr.CareSam']))
+
+# Pad the shorter arrays with NaN values to make them the same length
+for key in data.keys():
+    data[key] += [np.nan] * (max_length - len(data[key]))
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Change color for Dr.CareSam
+bar_colors = sns.color_palette("deep", 3)
+bar_colors[2] = (46/255, 187/255, 210/255)
+
+# Set custom colors for Happify and Woebot
+colors_happify_woebot = ['orange', 'red']  # Custom colors for Happify and Woebot
+
+# Plot
+plt.figure(figsize=(10, 6))
+sns.violinplot(data=df, inner="point", palette={'Woebot': colors_happify_woebot[0], 'Happify': colors_happify_woebot[1], 'Dr.CareSam': bar_colors[2]})
+plt.title('Comparison of digital therapy chatbots')
+plt.xlabel('Chatbots')
+plt.ylabel('Evaluation scores')
+plt.xticks(rotation=45)
+plt.show()
