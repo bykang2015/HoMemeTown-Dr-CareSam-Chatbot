@@ -34,7 +34,7 @@ HoMemeTown Dr. CareSam은 **ChatGPT 4.0을 활용한 크로스링구얼 정신�
 
 **📄 논문 정보**
 - **제목:** [대학생 정신건강 증진을 위한 
-디지털 중재 연구] 
+디지털 중재 연구]
 - 대규모 언어 모델(LLM) 기반 대화형 AI 
 상담 플랫폼의 설계와 실험적 평가 -
 
@@ -140,10 +140,14 @@ python hypothesis_testing.py
 ### **박사논문 인용**
 ```bibtex
 @phdthesis{kang2024phd,
-  title={[박사학위논문 제목]},
+  title={[대학생 정신건강 증진을 위한 
+디지털 중재 연구 
+- 대규모 언어 모델(LLM) 기반 대화형 AI 
+상담 플랫폼의 설계와 실험적 평가 -
+]},
   author={Kang, Boyoung},
   year={2024},
-  school={[소속 대학교]}
+  school={[성균관대학교]}
 }
 ```
 
