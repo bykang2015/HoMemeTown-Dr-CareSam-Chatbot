@@ -5,9 +5,9 @@ Dr.CareSam vs Global Mental Health Chatbots Comparative Analysis
 이 코드는 JMIR MI 논문과는 별개로, 박사학위논문의 실험 3에서 
 4개의 가설을 검증하기 위한 통계분석을 수행합니다.
 
-Author: [Your Name]
-Institution: [Your University]
-Date: 2024
+Author: [Boyoung Kang]
+Institution: [Sungkyunkwan University]
+Date: 2025
 """
 
 import numpy as np
