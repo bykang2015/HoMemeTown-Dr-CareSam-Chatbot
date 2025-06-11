@@ -119,10 +119,7 @@ python hypothesis_testing.py
   - 닥터케어쌤 개발 및 연구 총괄
   - GitHub: [@bykang2015](https://github.com/bykang2015)
 
-**공동 연구자**
-- **홍문표 (Munpyo Hong)** - PhD
-  - 자문 및 피드백
-  - 
+
 
 ## 📊 **인용 정보**
 
